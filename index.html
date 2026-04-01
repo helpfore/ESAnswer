@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embedded Systems – Answer Key</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #faf7f2;
+    --cream: #f0ebe0;
+    --gold: #b8860b;
+    --gold-light: #d4a843;
+    --rust: #8b3a1a;
+    --teal: #1a5c5c;
+    --border: #c8b99a;
+    --code-bg: #f5f0e8;
+    --mark-bg: #fff8dc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ── Header ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 60px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(184,134,11,0.06) 40px, rgba(184,134,11,0.06) 41px
+    );
+  }
+  .masthead-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+  .masthead-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .2em;
+    color: var(--gold-light); text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900; line-height: 1.15;
+    letter-spacing: -.01em;
+  }
+  .masthead h1 span { color: var(--gold-light); }
+  .masthead-meta {
+    margin-top: 20px; display: flex; gap: 32px; flex-wrap: wrap;
+    font-size: 13px; color: #c8b99a;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .masthead-meta b { color: var(--gold-light); }
+
+  /* ── Main layout ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 48px 32px 80px; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--cream); border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    padding: 24px 28px; margin-bottom: 48px;
+  }
+  .toc-title {
+    font-family: 'Playfair Display', serif; font-size: 14px;
+    text-transform: uppercase; letter-spacing: .12em;
+    color: var(--gold); margin-bottom: 14px;
+  }
+  .toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+  .toc-list a {
+    color: var(--ink); text-decoration: none; font-size: 13.5px;
+    display: flex; justify-content: space-between; gap: 8px;
+    padding: 3px 0; border-bottom: 1px dotted var(--border);
+  }
+  .toc-list a:hover { color: var(--rust); }
+  .toc-list .pts {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--gold); white-space: nowrap; font-weight: 600;
+  }
+
+  /* ── Question block ── */
+  .q-block {
+    margin-bottom: 52px; scroll-margin-top: 20px;
+  }
+  .q-header {
+    display: flex; align-items: baseline; gap: 16px;
+    border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 22px;
+  }
+  .q-num {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: 22px; color: var(--rust); white-space: nowrap;
+  }
+  .q-text {
+    font-size: 14px; font-style: italic; color: #555; flex: 1;
+    font-family: 'Source Serif 4', serif;
+  }
+  .q-marks {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: var(--ink); color: var(--gold-light);
+    padding: 3px 10px; border-radius: 2px; white-space: nowrap;
+  }
+
+  .or-divider {
+    text-align: center; position: relative; margin: 32px 0;
+    color: var(--gold);
+  }
+  .or-divider::before {
+    content: ''; position: absolute; top: 50%; left: 0; right: 0;
+    height: 1px; background: var(--border);
+  }
+  .or-divider span {
+    background: var(--paper); padding: 0 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .2em; position: relative; font-weight: 600;
+  }
+
+  /* ── Answer content ── */
+  h2.ans-head {
+    font-family: 'Playfair Display', serif; font-size: 17px;
+    color: var(--teal); margin: 20px 0 10px;
+    border-left: 3px solid var(--teal); padding-left: 12px;
+  }
+  h3.sub-head {
+    font-family: 'Source Serif 4', serif; font-weight: 600;
+    font-size: 14.5px; color: var(--rust); margin: 16px 0 8px;
+  }
+  p { margin-bottom: 10px; }
+  ul, ol { margin: 8px 0 10px 22px; }
+  ul li, ol li { margin-bottom: 5px; }
+  strong { font-weight: 600; color: var(--ink); }
+
+  /* ── Diagram / ASCII art ── */
+  .diagram {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 18px 22px; margin: 14px 0;
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+    line-height: 1.55; overflow-x: auto; white-space: pre;
+  }
+
+  /* ── Comparison table ── */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 14px 0; font-size: 13.5px;
+  }
+  thead tr { background: var(--ink); color: var(--paper); }
+  thead th {
+    padding: 9px 14px; text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: .05em; font-weight: 600;
+  }
+  tbody tr:nth-child(odd) { background: var(--cream); }
+  tbody tr:nth-child(even) { background: var(--paper); }
+  tbody td { padding: 8px 14px; border-bottom: 1px solid var(--border); }
+
+  /* ── Key-point callout ── */
+  .callout {
+    background: var(--mark-bg); border: 1px solid #e8d48a;
+    border-left: 4px solid var(--gold);
+    padding: 12px 18px; margin: 14px 0; font-size: 14px;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ── Marks hint ── */
+  .marks-hint {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+    color: var(--teal); background: #e8f4f4;
+    border: 1px solid #b0d8d8; padding: 6px 14px;
+    display: inline-block; margin: 10px 0 4px;
+  }
+
+  @media(max-width:600px){
+    .masthead { padding: 32px 20px 24px; }
+    .container { padding: 28px 16px 60px; }
+    .toc-list { grid-template-columns: 1fr; }
+    .q-header { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-tag">GTU · Subject Code 3161009 · Semester VI</div>
+    <h1>Embedded Systems<br><span>Answer Key</span></h1>
+    <div class="masthead-meta">
+      <div><b>Total Marks:</b> 30</div>
+      <div><b>Attempt:</b> All Questions</div>
+      <div><b>Course Outcomes:</b> CO1, CO2, CO3</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- TOC -->
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#q1a">Q-1(a) Embedded System with Diagram<span class="pts">5 M</span></a></li>
+      <li><a href="#q1b">Q-1(b) Port Pin Multiplexing in MSP430<span class="pts">4 M</span></a></li>
+      <li><a href="#q2a">Q-2 Medium vs Sophisticated Embedded Systems<span class="pts">4 M</span></a></li>
+      <li><a href="#q2b">Q-2 (OR) WDT Reset vs Brownout Reset<span class="pts">4 M</span></a></li>
+      <li><a href="#q3a">Q-3 Clock-driven vs Event-driven Scheduling<span class="pts">3 M</span></a></li>
+      <li><a href="#q3b">Q-3 (OR) Scheduling Algorithms Evaluation<span class="pts">3 M</span></a></li>
+      <li><a href="#q4a">Q-4 SPI Protocol with Diagram<span class="pts">7 M</span></a></li>
+      <li><a href="#q4b">Q-4 (OR) I2C Protocol with Diagram<span class="pts">7 M</span></a></li>
+      <li><a href="#q5a">Q-5 Low-Power Features of MSP430<span class="pts">7 M</span></a></li>
+      <li><a href="#q5b">Q-5 (OR) MSP430 Timer Modes<span class="pts">7 M</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════ Q1a -->
+  <section class="q-block" id="q1a">
+    <div class="q-header">
+      <span class="q-num">Q-1(a)</span>
+      <span class="q-text">Illustrate and explain any one embedded system with a necessary diagram.</span>
+      <span class="q-marks">5 Marks · A, U · CO1</span>
+    </div>
+
+    <h2 class="ans-head">Example: Automatic Temperature Control System</h2>
+    <p>An <strong>embedded system</strong> is a dedicated computing system designed to perform one or a few specific functions, often with real-time constraints, embedded within a larger device.</p>
+
+    <h3 class="sub-head">System: Room Temperature Controller</h3>
+    <p>This system reads temperature using a sensor, displays it on an LCD, and controls a fan/heater based on set thresholds — all managed by a microcontroller.</p>
+
+    <div class="diagram">
+         ┌──────────────────────────────────────────────────┐
+         │            TEMPERATURE CONTROL SYSTEM            │
+         │                                                  │
+         │  [Temperature]──ADC──┐                           │
+         │   Sensor (LM35)      │                           │
+         │                      ▼                           │
+         │              ┌───────────────┐    ┌─────────┐   │
+         │  [Keypad]───▶│  MSP430 / AVR │───▶│  16×2   │   │
+         │  (Set Temp)  │ Microcontroller│   │   LCD   │   │
+         │              │               │    └─────────┘   │
+         │  [Power]────▶│  GPIO / PWM   │───▶[FAN / HEATER]│
+         │   Supply     └───────────────┘    (Relay / MOSFET│
+         │                      │                           │
+         │                  [Buzzer]                        │
+         │                 (Alarm if >Max)                  │
+         └──────────────────────────────────────────────────┘</div>
+
+    <h3 class="sub-head">Component Description</h3>
+    <table>
+      <thead><tr><th>Component</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td>LM35 Temperature Sensor</td><td>Outputs analog voltage proportional to temperature (10 mV/°C)</td></tr>
+        <tr><td>ADC (built-in)</td><td>Converts analog sensor output to digital value</td></tr>
+        <tr><td>Microcontroller</td><td>Core unit — reads ADC, processes data, drives outputs</td></tr>
+        <tr><td>16×2 LCD</td><td>Displays current and set temperature</td></tr>
+        <tr><td>Relay / MOSFET</td><td>Switches fan or heater based on microcontroller decision</td></tr>
+        <tr><td>Keypad</td><td>User input to set desired temperature threshold</td></tr>
+        <tr><td>Buzzer</td><td>Alarm if temperature exceeds safe limit</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">Working Principle</h3>
+    <ol>
+      <li>LM35 outputs voltage = 10 mV × Temperature (°C). At 25°C → 250 mV.</li>
+      <li>ADC converts this to a 10-bit digital value; microcontroller computes actual °C.</li>
+      <li>If temperature &gt; set threshold → turn ON fan (cooling) via relay.</li>
+      <li>If temperature &lt; set threshold → turn ON heater.</li>
+      <li>LCD continuously displays both the measured and set values.</li>
+      <li>If temperature exceeds a safety maximum → buzzer sounds an alarm.</li>
+    </ol>
+
+    <div class="callout"><strong>Key Properties:</strong> This system has dedicated functionality (only controls temperature), operates in real-time (immediate response), is embedded in a device, consumes low power, and runs without user OS intervention.</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q1b -->
+  <section class="q-block" id="q1b">
+    <div class="q-header">
+      <span class="q-num">Q-1(b)</span>
+      <span class="q-text">Analyze the multiplexing scheme in the MSP430 processor for the port pins and explain its functionality.</span>
+      <span class="q-marks">4 Marks · N · CO1</span>
+    </div>
+
+    <h2 class="ans-head">Port Pin Multiplexing in MSP430</h2>
+    <p>MSP430 has limited physical pins. To maximize utility, most I/O pins are <strong>multiplexed</strong> — each pin can serve multiple functions selectable via software registers.</p>
+
+    <h3 class="sub-head">Concept of Multiplexing</h3>
+    <p>Each physical pin can function as: (1) General Purpose I/O (GPIO), or (2) a peripheral function like UART TX/RX, SPI MOSI/MISO/CLK, Timer output, ADC input, I2C SDA/SCL, etc. Software selects which function is active through control registers.</p>
+
+    <h3 class="sub-head">Control Registers for Port Multiplexing</h3>
+    <table>
+      <thead><tr><th>Register</th><th>Function</th><th>Bit = 0</th><th>Bit = 1</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PxDIR</strong></td><td>Direction</td><td>Input</td><td>Output</td></tr>
+        <tr><td><strong>PxSEL</strong></td><td>Function Select 1</td><td>GPIO</td><td>Peripheral function</td></tr>
+        <tr><td><strong>PxSEL2</strong></td><td>Function Select 2</td><td>—</td><td>Alternate peripheral function</td></tr>
+        <tr><td><strong>PxIN</strong></td><td>Input data register</td><td colspan="2">Read pin logic level</td></tr>
+        <tr><td><strong>PxOUT</strong></td><td>Output data register</td><td colspan="2">Set output logic level</td></tr>
+        <tr><td><strong>PxREN</strong></td><td>Pull-up/down enable</td><td>Disabled</td><td>Enabled</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">Function Selection Table (PxSEL + PxSEL2)</h3>
+    <table>
+      <thead><tr><th>PxSEL</th><th>PxSEL2</th><th>Selected Function</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>0</td><td>GPIO (General Purpose I/O)</td></tr>
+        <tr><td>1</td><td>0</td><td>Primary peripheral (e.g., UART TX/RX, Timer output)</td></tr>
+        <tr><td>0</td><td>1</td><td>Reserved (device-dependent)</td></tr>
+        <tr><td>1</td><td>1</td><td>Secondary peripheral (e.g., XTAL oscillator pins)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">Diagram: One Pin with Multiplexing</h3>
+    <div class="diagram">
+  Physical Pin P1.1
+        │
+        ▼
+  ┌─────────────────────────────────────────┐
+  │           MUX (Multiplexer)             │
+  │                                         │
+  │   ┌── GPIO Input/Output  ◀── PxSEL=0   │
+  │   │                          PxSEL2=0  │
+  │   │                                    │
+  │   ├── UART RXD (USCI_A)  ◀── PxSEL=1  │
+  │   │                          PxSEL2=0  │
+  │   │                                    │
+  │   └── Crystal (LFXT)     ◀── PxSEL=1  │
+  │                               PxSEL2=1 │
+  └─────────────────────────────────────────┘
+        ▲
+   PxDIR controls direction when in GPIO mode</div>
+
+    <h3 class="sub-head">Example (C Code)</h3>
+    <div class="diagram">// Configure P1.1 as UART RXD, P1.2 as UART TXD
+P1SEL  |= BIT1 + BIT2;   // Select peripheral function
+P1SEL2 |= BIT1 + BIT2;   // Select USCI_A (UART)
+
+// Configure P1.0 as GPIO output (LED)
+P1DIR |= BIT0;            // PxSEL = 0 (default) → GPIO
+P1OUT |= BIT0;            // Set output HIGH</div>
+
+    <div class="callout"><strong>Advantage of Multiplexing:</strong> Reduces chip size and pin count while offering maximum flexibility. The designer selects only the peripherals needed for their specific application.</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q2a -->
+  <section class="q-block" id="q2a">
+    <div class="q-header">
+      <span class="q-num">Q-2</span>
+      <span class="q-text">Analyze and compare the characteristics, architecture, and applications of Medium-Scale Embedded Systems and Sophisticated Embedded Systems.</span>
+      <span class="q-marks">4 Marks · N · CO1</span>
+    </div>
+
+    <h2 class="ans-head">Classification of Embedded Systems</h2>
+    <p>Embedded systems are classified by complexity, processing power, memory, and application domain:</p>
+
+    <table>
+      <thead><tr><th>Aspect</th><th>Medium-Scale Embedded Systems</th><th>Sophisticated Embedded Systems</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Complexity</strong></td><td>Moderate complexity, multitasking possible</td><td>Very high complexity, multi-processor or networked</td></tr>
+        <tr><td><strong>Processor</strong></td><td>8/16-bit microcontroller (PIC, AVR, MSP430)</td><td>32/64-bit microprocessor or DSP (ARM Cortex-A, x86)</td></tr>
+        <tr><td><strong>OS</strong></td><td>Bare-metal or lightweight RTOS (FreeRTOS, µCOS)</td><td>Full OS (Linux, Windows CE, VxWorks, Android)</td></tr>
+        <tr><td><strong>Memory</strong></td><td>Kilobytes of RAM, 16–256 KB Flash</td><td>Megabytes to Gigabytes of RAM; GBs of storage</td></tr>
+        <tr><td><strong>I/O</strong></td><td>UART, SPI, I2C, ADC, GPIO</td><td>USB, Ethernet, HDMI, Camera, Wi-Fi, BT, Touchscreen</td></tr>
+        <tr><td><strong>Power</strong></td><td>Low power, often battery-operated</td><td>Higher power, often mains-powered</td></tr>
+        <tr><td><strong>Cost</strong></td><td>Low (₹50–₹500 per unit)</td><td>High (₹1,000–₹50,000+ per unit)</td></tr>
+        <tr><td><strong>Real-Time</strong></td><td>Hard or soft real-time</td><td>Soft real-time or non-real-time</td></tr>
+        <tr><td><strong>Applications</strong></td><td>Home appliances, toys, industrial sensors, medical monitors</td><td>Smartphones, tablets, network routers, medical imaging, automotive ECUs, industrial robots</td></tr>
+        <tr><td><strong>Examples</strong></td><td>Digital thermostat, smart meter, washing machine controller</td><td>iPhone, MRI machine, car infotainment system, drone flight controller</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout"><strong>Key Distinction:</strong> Medium-scale systems execute a defined set of functions efficiently within tight resource budgets. Sophisticated systems support multiple concurrent applications, user interfaces, and network connectivity — effectively running a miniature computer.</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q2b (OR) -->
+  <div class="or-divider"><span>OR</span></div>
+
+  <section class="q-block" id="q2b">
+    <div class="q-header">
+      <span class="q-num">Q-2 (OR)</span>
+      <span class="q-text">Compare the Watchdog Timer Reset with Brownout Reset in terms of functionality, trigger conditions, and impact on system stability.</span>
+      <span class="q-marks">4 Marks · N · CO1</span>
+    </div>
+
+    <h2 class="ans-head">WDT Reset vs. Brownout Reset</h2>
+
+    <table>
+      <thead><tr><th>Parameter</th><th>Watchdog Timer (WDT) Reset</th><th>Brownout Reset (BOR)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Purpose</strong></td><td>Detects software hang / infinite loop</td><td>Detects unsafe supply voltage level</td></tr>
+        <tr><td><strong>Trigger Condition</strong></td><td>WDT counter reaches timeout without being cleared by software</td><td>VCC drops below a preset minimum threshold (e.g., 1.6V)</td></tr>
+        <tr><td><strong>Cause</strong></td><td>Software bug, deadlock, stack overflow, ISR not returning</td><td>Battery depletion, power supply instability, ESD events</td></tr>
+        <tr><td><strong>Detection Method</strong></td><td>Hardware counter counting clock cycles</td><td>Analog voltage comparator comparing VCC to internal reference</td></tr>
+        <tr><td><strong>Reset Type</strong></td><td>PUC (Power-Up Clear) — resets peripherals and CPU</td><td>POR (Power-On Reset) — full system reset</td></tr>
+        <tr><td><strong>Reset Flag</strong></td><td>WDTIFG flag set in IFG1 register</td><td>BOR flag set in the reset reason register</td></tr>
+        <tr><td><strong>Software Role</strong></td><td>Software must periodically kick (clear) WDT</td><td>Software has no role; purely hardware-driven</td></tr>
+        <tr><td><strong>Prevention</strong></td><td>Write WDTPW|WDTCNTCL before timeout</td><td>Use stable power supply; add bulk capacitor at VCC</td></tr>
+        <tr><td><strong>System Stability</strong></td><td>Prevents system hang — restarts CPU cleanly</td><td>Prevents incorrect operation at low voltage — avoids data corruption</td></tr>
+        <tr><td><strong>MSP430 Registers</strong></td><td>WDTCTL (WDTHOLD, WDTCNTCL, WDTISx)</td><td>SYSRSTIV (holds reset source vector)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="diagram">  WDT Reset Flow:                     Brownout Reset Flow:
+
+  [Program Running]               [VCC Starts Dropping]
+        │                                   │
+  [WDT Counter Ticking]           [Analog Comparator Monitors VCC]
+        │                                   │
+  Kick WDT? ──YES──▶ Reset Counter  VCC < VBOR_threshold?
+        │                                   │ YES
+       NO                          [BOR Circuit Fires]
+        │                                   │
+  [Counter Reaches 0]             [Assert RESET to CPU]
+        │                                   │
+  [WDT Generates PUC]             [Hold Reset until VCC recovers]
+        │                                   │
+  [System Restarts]               [Release Reset → POR Sequence]</div>
+
+    <div class="callout"><strong>Summary:</strong> WDT guards against software failures; BOR guards against hardware power failures. Both are essential safety mechanisms in robust embedded system design.</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q3a -->
+  <section class="q-block" id="q3a">
+    <div class="q-header">
+      <span class="q-num">Q-3</span>
+      <span class="q-text">Analyze the differences between clock-driven and event-driven scheduling based on their working principles, advantages, and applications in real-time systems.</span>
+      <span class="q-marks">3 Marks · N · CO3</span>
+    </div>
+
+    <h2 class="ans-head">Clock-Driven vs. Event-Driven Scheduling</h2>
+
+    <table>
+      <thead><tr><th>Parameter</th><th>Clock-Driven (Time-Triggered)</th><th>Event-Driven (Interrupt-Triggered)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Working Principle</strong></td><td>Tasks are scheduled at fixed, pre-defined time instants using a timer interrupt. The dispatcher runs at every clock tick and checks which task should execute.</td><td>Tasks execute only when a specific event occurs (external interrupt, message arrival, sensor trigger, timer expiry).</td></tr>
+        <tr><td><strong>Trigger</strong></td><td>Periodic hardware timer (fixed period)</td><td>Asynchronous interrupt or signal</td></tr>
+        <tr><td><strong>Schedule</strong></td><td>Static / offline — known at design time</td><td>Dynamic — depends on event occurrence</td></tr>
+        <tr><td><strong>Predictability</strong></td><td>Highly predictable; task start times are exactly known</td><td>Less predictable; depends on when events arrive</td></tr>
+        <tr><td><strong>CPU Utilization</strong></td><td>Can be low if many time slots are idle</td><td>High — CPU works only when needed</td></tr>
+        <tr><td><strong>Responsiveness</strong></td><td>Bounded worst-case response = one clock period</td><td>Near-immediate response to events</td></tr>
+        <tr><td><strong>Complexity</strong></td><td>Simple — no dynamic priority needed</td><td>Complex — need priority levels, ISR management</td></tr>
+        <tr><td><strong>Jitter</strong></td><td>Minimal — same execution time each cycle</td><td>Variable jitter depending on interrupt load</td></tr>
+        <tr><td><strong>Typical Use</strong></td><td>Hard real-time: flight control, ABS brakes, signal processing</td><td>Soft real-time: keypad scanning, communication, UI updates</td></tr>
+        <tr><td><strong>Example</strong></td><td>Sampling an ADC every 100 ms regardless of data change</td><td>Reading UART only when RXIFG interrupt fires</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><strong>In practice:</strong> Most real-time systems use a <em>hybrid</em> approach — a clock-driven backbone for critical periodic tasks, with event-driven interrupts for asynchronous I/O handling.</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q3b (OR) -->
+  <div class="or-divider"><span>OR</span></div>
+
+  <section class="q-block" id="q3b">
+    <div class="q-header">
+      <span class="q-num">Q-3 (OR)</span>
+      <span class="q-text">Evaluate the effectiveness of different scheduling algorithms in meeting the performance and real-time constraints of an embedded system.</span>
+      <span class="q-marks">3 Marks · E · CO3</span>
+    </div>
+
+    <h2 class="ans-head">Evaluation of Scheduling Algorithms</h2>
+    <table>
+      <thead><tr><th>Algorithm</th><th>Principle</th><th>Strengths</th><th>Limitations</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Round Robin (RR)</strong></td><td>Each task gets equal CPU time slice in rotation</td><td>Fair, simple, no starvation</td><td>Ignores priority; hard to meet deadlines</td><td>Soft real-time, background tasks</td></tr>
+        <tr><td><strong>RR with Interrupt</strong></td><td>RR base + high-priority interrupts preempt RR tasks</td><td>Handles urgent events quickly</td><td>Interrupt overload can starve RR tasks</td><td>Mixed-priority systems</td></tr>
+        <tr><td><strong>Rate Monotonic (RMS)</strong></td><td>Higher-frequency (shorter period) task gets higher fixed priority</td><td>Optimal for fixed-priority; easy to analyse</td><td>CPU utilisation limited to ~69% for n tasks</td><td>Hard real-time periodic tasks</td></tr>
+        <tr><td><strong>Earliest Deadline First (EDF)</strong></td><td>Task with nearest absolute deadline runs first (dynamic priority)</td><td>Theoretically optimal (100% utilisation)</td><td>Complex to implement; can miss multiple deadlines under overload</td><td>Dynamic hard real-time</td></tr>
+        <tr><td><strong>Fault-Tolerant Scheduling</strong></td><td>Reserves slack time and backup tasks for fault recovery</td><td>Ensures functionality even with component failure</td><td>Reduces effective utilisation; complex design</td><td>Safety-critical systems (medical, aerospace)</td></tr>
+        <tr><td><strong>Function Queue Scheduling</strong></td><td>Functions placed in a queue; dispatcher runs them in order (bare-metal RTOS-like)</td><td>Simple, predictable, no OS needed</td><td>No preemption; long tasks block others</td><td>Small microcontrollers, simple products</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><strong>Conclusion:</strong> RMS is best when all tasks are periodic with known periods. EDF maximises utilisation for dynamic workloads but is harder to implement. For simple embedded systems, function queue scheduling or RR with interrupts is sufficient. Safety-critical systems require fault-tolerant scheduling to guarantee operation under hardware failure.</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q4a -->
+  <section class="q-block" id="q4a">
+    <div class="q-header">
+      <span class="q-num">Q-4</span>
+      <span class="q-text">Explain the SPI protocol and analyze its working mechanism in embedded systems with necessary diagram.</span>
+      <span class="q-marks">7 Marks · U, N · CO2</span>
+    </div>
+
+    <h2 class="ans-head">SPI – Serial Peripheral Interface</h2>
+    <p>SPI is a <strong>synchronous, full-duplex, 4-wire serial communication protocol</strong> developed by Motorola. It uses a master-slave architecture where one master controls multiple slaves using a shared bus plus individual chip-select lines.</p>
+
+    <h3 class="sub-head">SPI Signal Lines</h3>
+    <table>
+      <thead><tr><th>Signal</th><th>Full Name</th><th>Direction</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SCLK</strong></td><td>Serial Clock</td><td>Master → Slave</td><td>Clock signal generated by master; synchronises all data transfers</td></tr>
+        <tr><td><strong>MOSI</strong></td><td>Master Out Slave In</td><td>Master → Slave</td><td>Data line from master to slave</td></tr>
+        <tr><td><strong>MISO</strong></td><td>Master In Slave Out</td><td>Slave → Master</td><td>Data line from slave to master</td></tr>
+        <tr><td><strong>CS / SS</strong></td><td>Chip Select / Slave Select</td><td>Master → Slave</td><td>Active LOW — selects which slave is active</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">SPI Block Diagram</h3>
+    <div class="diagram">
+           MASTER                              SLAVE
+   ┌─────────────────┐               ┌─────────────────┐
+   │  ┌───────────┐  │    SCLK ──────│──────────────   │
+   │  │  8-bit    │  │               │   8-bit         │
+   │  │  Shift    │◀─┼── MISO ───────│── Shift         │
+   │  │  Register │  │               │   Register      │
+   │  │           │──┼── MOSI ──────▶│                 │
+   │  └───────────┘  │               └─────────────────┘
+   │     Clock Gen ──┼── SCLK ──────▶                  │
+   │                 │    CS  ──────▶ (Chip Select)     │
+   └─────────────────┘                                  
+
+   Note: Each SCLK pulse shifts 1 bit out of master's register
+         and 1 bit into master from slave (simultaneously).
+   After 8 clock pulses → complete 1-byte exchange.</div>
+
+    <h3 class="sub-head">SPI Working Mechanism</h3>
+    <ol>
+      <li>Master pulls <strong>CS LOW</strong> to select the target slave.</li>
+      <li>Master generates <strong>SCLK</strong> pulses. Each pulse shifts 1 bit: MOSI sends master's data to slave, MISO brings slave's data to master.</li>
+      <li>Both master and slave shift registers rotate simultaneously — after 8 pulses, a full byte is exchanged in both directions (full-duplex).</li>
+      <li>Master pulls <strong>CS HIGH</strong> to deselect the slave and end the transaction.</li>
+      <li>For multiple slaves, each has its own CS line; others are kept HIGH (inactive).</li>
+    </ol>
+
+    <h3 class="sub-head">SPI Timing Diagram (Mode 0: CPOL=0, CPHA=0)</h3>
+    <div class="diagram">
+CS:   ─────┐                              ┌──────
+           └──────────────────────────────┘
+
+SCLK:       ┌──┐  ┌──┐  ┌──┐  ┌──┐  ┌──┐
+            │  │  │  │  │  │  │  │  │  │
+      ───── ┘  └──┘  └──┘  └──┘  └──┘  └─────
+
+MOSI: ──────[  B7 ][  B6 ][  B5 ][  B4 ][ ... ]───
+
+MISO: ──────[  B7 ][  B6 ][  B5 ][  B4 ][ ... ]───
+       Data sampled on RISING edge (Mode 0)</div>
+
+    <h3 class="sub-head">SPI Modes</h3>
+    <table>
+      <thead><tr><th>Mode</th><th>CPOL</th><th>CPHA</th><th>Clock Idle</th><th>Data Capture Edge</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>0</td><td>0</td><td>Low</td><td>Rising</td></tr>
+        <tr><td>1</td><td>0</td><td>1</td><td>Low</td><td>Falling</td></tr>
+        <tr><td>2</td><td>1</td><td>0</td><td>High</td><td>Falling</td></tr>
+        <tr><td>3</td><td>1</td><td>1</td><td>High</td><td>Rising</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">Advantages and Disadvantages</h3>
+    <table>
+      <thead><tr><th>Advantages</th><th>Disadvantages</th></tr></thead>
+      <tbody>
+        <tr><td>Full-duplex — simultaneous TX and RX</td><td>No acknowledgement mechanism</td></tr>
+        <tr><td>High speed (up to 50 MHz+)</td><td>Needs separate CS line per slave</td></tr>
+        <tr><td>Simple protocol — no addressing needed</td><td>Not suitable for long-distance communication</td></tr>
+        <tr><td>Low overhead — just clock and 2 data lines</td><td>No built-in error detection</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout"><strong>Applications:</strong> SD cards, SPI Flash memory (W25Q64), ADC/DAC chips, OLED displays (SSD1306), sensors (MPU6050 SPI mode), LCD controllers, Ethernet controllers (ENC28J60).</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q4b (OR) -->
+  <div class="or-divider"><span>OR</span></div>
+
+  <section class="q-block" id="q4b">
+    <div class="q-header">
+      <span class="q-num">Q-4 (OR)</span>
+      <span class="q-text">Explain the I2C protocol and analyze its working mechanism in embedded systems with necessary diagram.</span>
+      <span class="q-marks">7 Marks · U, N · CO2</span>
+    </div>
+
+    <h2 class="ans-head">I2C – Inter-Integrated Circuit Protocol</h2>
+    <p>I2C (pronounced "I-squared-C") is a <strong>synchronous, half-duplex, 2-wire serial communication protocol</strong> developed by Philips (now NXP). It supports multiple masters and multiple slaves on the same 2-wire bus using a unique 7-bit address for each device.</p>
+
+    <h3 class="sub-head">I2C Signal Lines</h3>
+    <table>
+      <thead><tr><th>Line</th><th>Function</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SDA</strong> (Serial Data)</td><td>Bidirectional data line — carries address and data bits</td><td>Open-drain with pull-up resistor</td></tr>
+        <tr><td><strong>SCL</strong> (Serial Clock)</td><td>Clock line generated by master</td><td>Open-drain with pull-up resistor</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">I2C Bus Diagram (Multi-Device)</h3>
+    <div class="diagram">
+VCC
+ │
+[4.7kΩ] [4.7kΩ]         ← Pull-up resistors (required)
+ │         │
+ SDA ──────┼────────┬──────────┬──────────┐
+           │        │          │          │
+ SCL ──────┼──┬─────┼────┬─────┼────┬─────┼───
+           │  │     │    │     │    │     │
+     ┌─────┴──┴─┐ ┌─┴────┴─┐ ┌─┴───┴──┐ ┌─┴────────┐
+     │  MASTER  │ │Slave 1 │ │Slave 2 │ │ Slave 3  │
+     │(MSP430)  │ │(0x48)  │ │(0x3C)  │ │(0x68)    │
+     └──────────┘ └────────┘ └────────┘ └──────────┘
+                   Temp Sensor  OLED      Accelerometer</div>
+
+    <h3 class="sub-head">I2C Data Frame Structure</h3>
+    <div class="diagram">
+START  │  Address (7-bit) + R/W  │ ACK │  Data Byte  │ ACK │ ... │ STOP
+  ▼       bit7 bit6 ... bit1 bit0   ▼    D7 D6...D1 D0  ▼           ▼
+
+SDA: ─┐  A6 A5 A4 A3 A2 A1 A0  R/W  0   D7 D6 ... D1 D0  0        ─┐
+SCL: ─┘──┌┐┌┐┌┐┌┐┌┐┌┐┌┐  ┌┐  ┌┐  ┌┐┌┐┌┐... ┌┐┌┐  ┌┐    ─┘
+         └┘└┘└┘└┘└┘└┘└┘  └┘  └┘  └┘└┘└┘... └┘└┘  └┘
+
+START Condition: SDA falls while SCL is HIGH
+STOP  Condition: SDA rises while SCL is HIGH
+ACK: Slave pulls SDA LOW during 9th clock pulse to acknowledge</div>
+
+    <h3 class="sub-head">I2C Working Mechanism — Step by Step</h3>
+    <ol>
+      <li><strong>START Condition:</strong> Master pulls SDA LOW while SCL is still HIGH. This signals the beginning of communication to all slaves on the bus.</li>
+      <li><strong>Address + R/W bit:</strong> Master sends 7-bit slave address (MSB first) + 1 R/W bit (0=write, 1=read). Total 8 bits per address byte.</li>
+      <li><strong>ACK from Slave:</strong> The addressed slave pulls SDA LOW during the 9th clock pulse. If SDA remains HIGH, it's a NACK (not acknowledged — device not present or busy).</li>
+      <li><strong>Data Transfer:</strong> Each byte (8 bits) is sent MSB first on SDA, clocked by SCL. After each byte, an ACK/NACK is sent.</li>
+      <li><strong>Repeated START (Sr):</strong> Master can send a new START without releasing bus — used to switch from write to read within one transaction.</li>
+      <li><strong>STOP Condition:</strong> Master releases SDA (HIGH) while SCL is HIGH, ending the transaction and freeing the bus.</li>
+    </ol>
+
+    <h3 class="sub-head">I2C Read Sequence</h3>
+    <div class="diagram">
+Master: START → [Addr + W] → [Reg Address] → Sr → [Addr + R] → ...NACK → STOP
+Slave:                 ACK          ACK                    ACK → [Data] ...
+
+Example: Read register 0x00 from I2C device at address 0x48:
+  1. START
+  2. Send 0x90 (0x48 << 1 | 0 = Write mode)  → ACK
+  3. Send 0x00 (register pointer)             → ACK
+  4. Repeated START
+  5. Send 0x91 (0x48 << 1 | 1 = Read mode)   → ACK
+  6. Receive data byte from slave             → NACK (last byte)
+  7. STOP</div>
+
+    <h3 class="sub-head">I2C vs SPI Comparison</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>I2C</th><th>SPI</th></tr></thead>
+      <tbody>
+        <tr><td>Wires</td><td>2 (SDA, SCL)</td><td>4 (MOSI, MISO, SCLK, CS)</td></tr>
+        <tr><td>Speed</td><td>100 kHz / 400 kHz / 3.4 MHz</td><td>Up to 50 MHz+</td></tr>
+        <tr><td>Slaves</td><td>Up to 128 (7-bit address)</td><td>Limited by CS pins</td></tr>
+        <tr><td>Duplex</td><td>Half-duplex</td><td>Full-duplex</td></tr>
+        <tr><td>ACK</td><td>Yes (hardware ACK)</td><td>No</td></tr>
+        <tr><td>Complexity</td><td>More complex protocol</td><td>Simpler protocol</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><strong>Applications:</strong> EEPROM (AT24C256), temperature sensors (LM75, DS3231 RTC), accelerometers (MPU6050), OLED displays (SSD1306), battery gas gauges. I2C is preferred when many devices share a bus and wiring simplicity matters more than raw speed.</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q5a -->
+  <section class="q-block" id="q5a">
+    <div class="q-header">
+      <span class="q-num">Q-5</span>
+      <span class="q-text">Analyze and discuss the low-power features of MSP430 processor.</span>
+      <span class="q-marks">7 Marks · N · CO1</span>
+    </div>
+
+    <h2 class="ans-head">Low-Power Features of MSP430</h2>
+    <p>Low power consumption is the <strong>defining design philosophy</strong> of MSP430. Every architectural decision — from voltage levels to clock architecture to peripheral design — is driven by minimising energy consumption.</p>
+
+    <h3 class="sub-head">1. Low Supply Voltage</h3>
+    <p>MSP430 operates from <strong>1.8V to 3.6V</strong>. Dynamic power consumption follows P = CV²f. At 1.8V vs 5V (8051), the power reduction is (1.8/5)² = 0.13 — only 13% of the power at same frequency. This allows operation from a single coin cell (CR2032, 3V) for years.</p>
+
+    <h3 class="sub-head">2. Flexible Clock Architecture</h3>
+    <table>
+      <thead><tr><th>Clock Source</th><th>Frequency</th><th>Current</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>LFXT (32.768 kHz crystal)</strong></td><td>32.768 kHz</td><td>~0.5 µA</td><td>Ultra-low-power timekeeping; active in LPM3</td></tr>
+        <tr><td><strong>DCO (Internal RC)</strong></td><td>100 kHz–16 MHz</td><td>~100 µA</td><td>Fast startup (&lt;6 µs); no external component</td></tr>
+        <tr><td><strong>VLO (Internal)</strong></td><td>~12 kHz</td><td>~0.5 µA</td><td>Ultra-low power; alternative when crystal not needed</td></tr>
+        <tr><td><strong>HFXT (External)</strong></td><td>1–16 MHz</td><td>~200 µA</td><td>High-accuracy; for precise communication</td></tr>
+      </tbody>
+    </table>
+    <p>Three derived clocks: <strong>MCLK</strong> (CPU), <strong>SMCLK</strong> (fast peripherals), <strong>ACLK</strong> (slow peripherals). Each can be independently gated.</p>
+
+    <h3 class="sub-head">3. Five Low Power Modes (LPM0–LPM4)</h3>
+    <div class="diagram">
+  ┌────────────────────────────────────────────────────────────────┐
+  │                  MSP430 Power Mode Ladder                      │
+  │                                                                │
+  │  ACTIVE      CPU+MCLK+SMCLK+ACLK+DCO  all ON   ~200-500 µA   │
+  │      │                                                        │
+  │     LPM0     CPU+MCLK OFF  SMCLK+ACLK+DCO ON    ~50 µA       │
+  │      │                                                        │
+  │     LPM1     CPU+MCLK+DCO OFF (if unused)        ~30 µA       │
+  │      │                                                        │
+  │     LPM2     CPU+MCLK+SMCLK+DCO OFF  ACLK ON    ~17 µA       │
+  │      │                                                        │
+  │     LPM3     All OFF except ACLK (32kHz)          ~1 µA       │  ← Most common
+  │      │                                                        │
+  │     LPM4     EVERYTHING OFF                      ~0.1 µA      │
+  └────────────────────────────────────────────────────────────────┘</div>
+
+    <table>
+      <thead><tr><th>Mode</th><th>CPUOFF</th><th>OSCOFF</th><th>SCG0</th><th>SCG1</th><th>Wake-up Source</th></tr></thead>
+      <tbody>
+        <tr><td>LPM0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>Any interrupt</td></tr>
+        <tr><td>LPM1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>Any interrupt</td></tr>
+        <tr><td>LPM2</td><td>1</td><td>0</td><td>1</td><td>1</td><td>ACLK peripherals, external GPIO</td></tr>
+        <tr><td>LPM3</td><td>1</td><td>0</td><td>1</td><td>1</td><td>ACLK timer, RTC, WDT interval, GPIO</td></tr>
+        <tr><td>LPM4</td><td>1</td><td>1</td><td>1</td><td>1</td><td>External GPIO interrupt only</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">4. Interrupt-Driven Architecture</h3>
+    <p>MSP430 is designed to <strong>sleep between events</strong>. All peripherals (Timer, UART, ADC, I2C) can generate interrupts to wake the CPU. The CPU runs only for the microseconds needed to process data, then returns to sleep — this is called the <strong>"sleep most of the time"</strong> design pattern.</p>
+
+    <div class="diagram">
+  Timeline: ──sleep──▶ISR(10µs)──sleep──▶ISR(10µs)──sleep──▶...
+  Active Duty Cycle = 10µs / 1,000,000µs = 0.001%
+  Average Current ≈ 0.001% × 200µA + 99.999% × 1µA ≈ 1.002 µA</div>
+
+    <h3 class="sub-head">5. Peripherals Operate Without CPU</h3>
+    <p>Timer_A, RTC, WDT, and USCI all continue functioning in LPM3 while the CPU is fully off, consuming only nanoamperes themselves. ADC can be triggered by a timer and store results via DMA — without ever waking the CPU.</p>
+
+    <h3 class="sub-head">6. Fast Wake-up</h3>
+    <p>DCO starts in under <strong>6 µs</strong> (unlike crystals which need 1–100 ms). This means the CPU can wake, process data in a few microseconds, and return to sleep — making frequent wake-ups energy-efficient.</p>
+
+    <h3 class="sub-head">7. Low-Power Design Techniques (C Code)</h3>
+    <div class="diagram">// 1. Enter LPM3 (CPU off, ACLK timer running)
+__bis_SR_register(LPM3_bits + GIE);
+
+// 2. Wake up from ISR and go back to sleep
+#pragma vector = TIMERA0_VECTOR
+__interrupt void Timer_ISR(void) {
+    do_work();
+    // __bic_SR_register_on_exit(LPM3_bits); // Only if need to stay awake
+    // Without the above line, CPU returns to LPM3 after ISR
+}
+
+// 3. Set all unused pins to output LOW to prevent floating
+P1DIR = 0xFF; P1OUT = 0x00;
+P2DIR = 0xFF; P2OUT = 0x00;</div>
+
+    <div class="callout"><strong>Result:</strong> A typical MSP430 data-logger application running at 1-second intervals in LPM3 consumes ~2 µA average. A CR2032 coin cell (220 mAh) can power it for 220,000/0.002 = 110,000,000 hours — over 12,000 years theoretically (limited by battery self-discharge in practice to ~10 years).</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ Q5b (OR) -->
+  <div class="or-divider"><span>OR</span></div>
+
+  <section class="q-block" id="q5b">
+    <div class="q-header">
+      <span class="q-num">Q-5 (OR)</span>
+      <span class="q-text">Analyze the Timer module of MSP430 and explain its various modes of operation.</span>
+      <span class="q-marks">7 Marks · N, U · CO1</span>
+    </div>
+
+    <h2 class="ans-head">MSP430 Timer Module (Timer_A)</h2>
+    <p>Timer_A is a <strong>16-bit general-purpose timer</strong> in MSP430. It is one of the most important and versatile peripherals — used for time delays, periodic interrupts, PWM signal generation, frequency measurement, and event capture.</p>
+
+    <h3 class="sub-head">Timer_A Internal Architecture</h3>
+    <div class="diagram">
+           Clock Source
+        (TASSEL: ACLK/SMCLK/TACLK)
+                │
+          ┌─────▼────┐
+          │  Divider │  (ID: ÷1, ÷2, ÷4, ÷8)
+          └─────┬────┘
+                │
+          ┌─────▼──────────────────────────────────────┐
+          │         16-bit Counter (TAR)                │
+          │              0 → 0xFFFF                     │
+          └───────┬──────────┬──────────┬───────────────┘
+                  │          │          │
+              ┌───▼───┐  ┌───▼───┐  ┌──▼────┐
+              │ CCR0  │  │ CCR1  │  │ CCR2  │  Capture/Compare Registers
+              │(Period)  │(Duty1)│  │(Duty2)│
+              └───┬───┘  └───┬───┘  └──┬────┘
+                  │          │         │
+               INT(TA0)   INT/Output  INT/Output
+                           (TA1)       (TA2)</div>
+
+    <h3 class="sub-head">Key Registers</h3>
+    <table>
+      <thead><tr><th>Register</th><th>Bits of Interest</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TACTL</strong></td><td>TASSEL (9:8), ID (7:6), MC (5:4), TACLR (2), TAIE (1)</td><td>Main control: clock source, divider, mode, clear, overflow interrupt</td></tr>
+        <tr><td><strong>TAR</strong></td><td>15:0</td><td>Current 16-bit counter value (read/write)</td></tr>
+        <tr><td><strong>TACCR0</strong></td><td>15:0</td><td>Compare register 0 — sets period in Up mode</td></tr>
+        <tr><td><strong>TACCR1/2</strong></td><td>15:0</td><td>Compare registers 1 and 2 — for duty cycle or second compare</td></tr>
+        <tr><td><strong>TACCTL0/1/2</strong></td><td>CAP (8), OUTMOD (5:3), CCIE (4), CCIFG (0)</td><td>Per-channel control: capture/compare mode, output mode, interrupt enable</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">MODE 1: Stop Mode (MC = 00)</h3>
+    <p>The timer counter (TAR) is frozen — it stops counting. Used to pause the timer temporarily without losing the current count value.</p>
+    <div class="diagram">TAR: ──[frozen value]──────────────────────────────────</div>
+
+    <h3 class="sub-head">MODE 2: Up Mode (MC = 01)</h3>
+    <p>Timer counts from 0 up to the value in <strong>TACCR0</strong>, then resets to 0 and repeats. Period = (TACCR0 + 1) × clock period. An interrupt is generated every time TAR reaches TACCR0 (CCIFG0 flag set).</p>
+    <div class="diagram">
+TAR value:
+TACCR0 ──│     /│     /│     /│     /│
+          │    / │    / │    / │    / │
+          │   /  │   /  │   /  │   /  │
+          │  /   │  /   │  /   │  /   │
+        0─┘/    └┘/    └┘/    └┘/    └
+               ↑  ↑  ↑  ↑
+             INT at each TACCR0 match
+
+Period = (TACCR0 + 1) × (1 / f_clock)
+Example: ACLK = 32768 Hz, TACCR0 = 32767 → Period = 1 second</div>
+
+    <div class="diagram">// 1-second interrupt using Up mode + ACLK
+TACTL  = TASSEL_1 | MC_1 | TACLR;   // ACLK, Up mode, clear
+TACCR0 = 32768 - 1;                  // 1 second
+TACCTL0 = CCIE;                      // Enable CCR0 interrupt</div>
+
+    <h3 class="sub-head">MODE 3: Continuous Mode (MC = 10)</h3>
+    <p>Timer counts from 0 to 0xFFFF (65535) then overflows to 0 and continues. Period = 65536 × clock period. Used when more flexible timing is needed, or when multiple independent time intervals are needed using CCR1 and CCR2.</p>
+    <div class="diagram">
+TAR:
+0xFFFF──│            /│           /│
+        │           / │          / │
+        │          /  │         /  │
+      0─┘─────────/   └────────/   └─
+                 ↑              ↑
+           Overflow INT    Overflow INT (TAIFG)</div>
+
+    <h3 class="sub-head">MODE 4: Up/Down Mode (MC = 11)</h3>
+    <p>Timer counts up from 0 to TACCR0, then back down to 0, creating a triangular waveform. Period = 2 × TACCR0 × clock period. This mode is ideal for <strong>centre-aligned PWM</strong>, which produces symmetric PWM with less harmonic distortion than edge-aligned (Up mode) PWM.</p>
+    <div class="diagram">
+TAR:
+TACCR0──│    /\      /\      /\
+        │   /  \    /  \    /  \
+        │  /    \  /    \  /    \
+      0─┘─/      \/      \/      \─
+
+Period = 2 × TACCR0 × T_clock
+PWM duty cycle controlled by TACCR1 (set/reset points on up and down slopes)</div>
+
+    <h3 class="sub-head">Capture Mode</h3>
+    <p>In capture mode, TAR's current value is automatically copied into a CCRx register when a selected edge (rising/falling) is detected on an external input pin. Used for <strong>frequency measurement</strong> and <strong>pulse-width measurement</strong>.</p>
+    <div class="diagram">External Signal:  ───────┐        ┌──────
+                           └────────┘
+                     ↑               ↑
+              TAR captured           TAR captured
+              into CCR1 (t1)        into CCR1 (t2)
+
+Pulse Width = (t2 - t1) × T_clock
+Frequency   = 1 / ((t2 - t1) × T_clock)</div>
+
+    <h3 class="sub-head">PWM Generation using Timer_A</h3>
+    <div class="diagram">// 1 kHz PWM, 50% duty cycle, using SMCLK at 1 MHz
+TACTL   = TASSEL_2 | MC_1 | TACLR;  // SMCLK, Up mode
+TACCR0  = 1000 - 1;                  // Period = 1000 cycles = 1 ms = 1 kHz
+TACCR1  = 500;                       // 50% duty cycle
+TACCTL1 = OUTMOD_7;                  // Reset/Set: output HIGH until CCR1, then LOW
+P1DIR  |= BIT2;                      // P1.2 as output
+P1SEL  |= BIT2;                      // Connect P1.2 to Timer_A output</div>
+
+    <table>
+      <thead><tr><th>OUTMOD</th><th>Mode Name</th><th>Output Behaviour</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Output</td><td>Output = OUTBIT (software-controlled)</td></tr>
+        <tr><td>1</td><td>Set</td><td>Set when TAR = TACCRx</td></tr>
+        <tr><td>2</td><td>Toggle/Reset</td><td>Toggle at CCRx, Reset at CCR0</td></tr>
+        <tr><td>3</td><td>Set/Reset</td><td>Set at CCRx, Reset at CCR0</td></tr>
+        <tr><td>4</td><td>Toggle</td><td>Toggle when TAR = TACCRx</td></tr>
+        <tr><td>5</td><td>Reset</td><td>Reset when TAR = TACCRx</td></tr>
+        <tr><td>6</td><td>Toggle/Set</td><td>Toggle at CCRx, Set at CCR0</td></tr>
+        <tr><td>7</td><td>Reset/Set</td><td>Reset at CCRx, Set at CCR0 ← <strong>most used for PWM</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout"><strong>Summary:</strong> Timer_A is the backbone of MSP430 timing. Up mode = clean periodic interrupts. Continuous mode = flexible multi-channel timing. Up/Down mode = centre-aligned PWM. Capture mode = measure external signals. Combined with ACLK in LPM3, Timer_A enables precise timekeeping at ~1 µA total current.</div>
+  </section>
+
+</main>
+</body>
+</html>
